@@ -2,6 +2,7 @@
 
 include ('template/header.php');
 
+
 $conn = mysqli_connect('localhost', 'zikky', 'test1234', 'php_blog');
 
 if(!$conn){
@@ -15,9 +16,40 @@ $sql = 'SELECT title, description, img FROM blog';
 $result = mysqli_query($conn, $sql);
 
 //fetch the resulting rows as an array
-$blog = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$blogs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-print_r($blog);
+
+//free result from memory
+mysqli_free_result($result);
+
+mysqli_close($conn);
+
+$sql = "INSERT INTO blog(title, description, img)";
+
 
 
 ?>
+
+<h4 class="center grey-text">Blog Posts </h4>
+<div class="container">
+
+<div class = "row">
+
+<?php foreach($blogs as $blog){ ?>
+
+<div class="col md-4">
+<div class="card z-depth-0">
+<div class="card-content center">
+<h6><?php echo htmlspecialchars($blog['title']) ?></h6>
+<div><?php echo htmlspecialchars($blog['description']) ?></div>
+<div><?php ($blog['img']) ?></div>
+<div class="card-action right-align">
+<a class="brand-text" href="#">more info</a>
+</div>
+</div>
+</div>
+</div>
+<?php } ?>
+
+</div>
+</div>

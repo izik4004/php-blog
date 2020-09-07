@@ -2,11 +2,14 @@
 
 
 include ('template/header.php');
+include ('config/db_connect.php');
 
-if(isset($_GET['submit'])){
+if(isset($_POST['submit'])){
   echo htmlspecialchars($_POST['title']);
   echo htmlspecialchars($_POST['description']);
+  echo htmlspecialchars($_POST['img']);
 }
+
 
 ?>
 
@@ -16,7 +19,7 @@ if(isset($_GET['submit'])){
 <!DOCTYPE html>
 <html lang="en">
 
-<form class="white" action="create.php" method="GET" enctype="multipart/form-data">
+<form class="white" action="create.php" method="POST" enctype="multipart/form-data">
   <div class="form-row">
       <h3> Add New Blog Content </h3></br>
     <div class="form-group col-md-10"></br>
@@ -25,7 +28,7 @@ if(isset($_GET['submit'])){
     </div>
     <div class="form-group col-md-10"></br>
     <label>Picture</label>
-    <input type="file" name="image">
+    <input type="file" name="img">
     </div>
     <div class="form-group col-md-6">
       <label>Description</label>
@@ -38,7 +41,7 @@ if(isset($_GET['submit'])){
   </div>
   </div>
   <button type="submit" class="btn btn-outline-primary">Save</button>
-  <button type="submit" class="btn btn-outline-success">Publish</button>
+  <button type="submit"  class="btn btn-outline-success"><a href="view.php">Publish</a></button>
 </form>
 
 
